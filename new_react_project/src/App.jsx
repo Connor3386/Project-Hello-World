@@ -8,29 +8,22 @@ function App() {
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+     
+     
+      <div className="flex justify-center p-8">
+        <div className="bg-white border-2 border-blue-300 rounded-2xl shadow-lg hover:shadow-2xl hover:bg-blue-50 transition-all duration-300 p-8 w-80">
+          <h3 className="text-2xl font-bold text-center text-gray-800 mb-4 underline decoration-blue-500">Counter Card</h3>
+          <button 
+            onClick={() => setCount((count) => count + 1)}
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition-all duration-200 mb-4"
+          >
+            Count is {count}
+          </button>
+         
+          <p className="text-sm text-gray-500 text-center">Click the button above to add to the counter!</p>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-        <h1 className="text-4xl font-bold text-blue-600 bg-yellow-100 p-8 rounded-xl">
-  Tailwind is working!
-</h1>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+   
     </>
   )
 }
