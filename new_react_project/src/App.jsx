@@ -1,30 +1,45 @@
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Profile from "./pages/Profile";
+import { useState } from "react";
+import Card from "./Card.jsx";
+import LikeButton from "./components/LikeButton.jsx"
 
-function App() {
-  return (
+function Header(){
+  const [isOpen, setIsOpen] = useState(false);
 
-    <div>
-      <AboutMe
-      names='Name: Connor'
-      titles='Code manager'
-      paragraph='I like coding but can find it tedious at times. Im doing CS because I want to study astrophysics,
-                and computational astrophysics is really interesting. I might want to avoid the CS parts if it 
-                becomes too difficult in college.'
-      image='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2k8y5nFWtC3iYBf0AFEj7wrJ5n9CK7HHTuQ&s'/>
+  return(
+    <header className="bg-gray-900 text-white px-6 py-4">
+      <div className="flex justify-between items-center">
+        <h1 className="text-xl font-bold">YourBrandName</h1>
 
-      <AboutMe
-      names='Name: Jules'
-      titles='Project manager'
-      paragraph='I have loved maps since I could remember. I want to be able to create something with maps that will 
-      benefit the communuty that helped me learn to love geography and history, so I am very excited. to work on this
-     app.'
-      image='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVXl999FEKE4-GHm3BuDb93BeohdgQ9v6reg&s'/>
+        <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="text-2xl">
+          {isOpen ? "x" : "☰"}
+        </button>
 
-    </div>
-  )
+        <LikeButton/>
+
+        <Card
+          name="Connor"
+          title="project manager"
+          blurb="likes science"
+          github="https://github.com/Connor3386/Project-Hello-World"
+          skills="math, debate, teamwork"
+        />
+      </div>
+
+      {isOpen&& (
+        <nav className="mt-4">
+          <ul className="flex flex-col gap-2">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </nav>
+      )}
+    </header>
+  );
+
 }
 
-export default App;
+export default Header;
