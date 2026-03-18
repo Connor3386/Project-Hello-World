@@ -22,7 +22,7 @@ GitHub Repo</a>
 )}
 {skills && (
 <p className="text-sm text-gray-600 mt-2">
-• Skills: {skills}
+• Skills: {skills}!
 </p>
 )}
 </div>
