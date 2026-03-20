@@ -1,11 +1,12 @@
 import { useState } from "react";
-function Card({ name, title, blurb, github, skills }) { const [showMore, setShowMore] = useState(false);
+function Card({ name, title, blurb, github, skills, image }) { const [showMore, setShowMore] = useState(false);
 return (
 <div className="bg-white rounded-2xl shadow-md p-6 w-72 text-center hover: shadow-xl
 transition-all duration-200">
 <h3 className="text-xl font-bold text-gray-800">
 {name}
 </h3>
+<div className="mask-radial-at-center mask-radial-from-100%"><img className="rounded-full" src={image}/></div>
 <p className="text-blue-500 font-semibold">{title}</p> <p className="text-gray-500 mt-2">{blurb}</p>
 <button
 onClick={() => setShowMore (!showMore)} className="mt-4 text-sm text-blue-500 hover: text-blue-700 font-semibold"

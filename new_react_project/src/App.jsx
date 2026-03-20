@@ -1,11 +1,14 @@
+import ConnorPhoto from "./assets/ConnorPhoto.jpeg"
 import { useState } from "react";
 import Card from "./Card.jsx";
 import LikeButton from "./components/LikeButton.jsx"
+
 
 function Header(){
   const [isOpen, setIsOpen] = useState(false);
 
   return(
+    <div>
     <header className="bg-gray-900 text-white px-6 py-4">
       <div className="flex justify-between items-center">
         <h1 className="text-xl font-bold">YourBrandName</h1>
@@ -17,14 +20,6 @@ function Header(){
         </button>
 
         <LikeButton/>
-
-        <Card
-          name="Connor"
-          title="project manager"
-          blurb="likes science"
-          github="https://github.com/Connor3386/Project-Hello-World"
-          skills="math, debate, teamwork"
-        />
       </div>
 
       {isOpen&& (
@@ -38,6 +33,9 @@ function Header(){
         </nav>
       )}
     </header>
+
+
+    </div>
   );
 
 }
