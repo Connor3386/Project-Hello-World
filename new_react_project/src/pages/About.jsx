@@ -1,25 +1,33 @@
-import AboutMe from "../Aboutme";
+import ConnorPhoto from "../assets/ConnorPhoto.jpeg"
+import Card from "../Card.jsx";
 
 function About() {
-  return (
-    <div>
-      <h1>About Page</h1>
-      <AboutMe
-        names='Name: Connor'
-        titles='Code manager'
-        paragraph='I like coding but can find it tedious at times. Im doing CS because I want to study astrophysics,
-                and computational astrophysics is really interesting. I might want to avoid the CS parts if it
-                becomes too difficult in college.'
-        image='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2k8y5nFWtC3iYBf0AFEj7wrJ5n9CK7HHTuQ&s'/>
-      <AboutMe
-        names='Name: Jules'
-        titles='Project manager'
-        paragraph='I have loved maps since I could remember. I want to be able to create something with maps that will
-      benefit the communuty that helped me learn to love geography and history, so I am very excited. to work on this
-     app.'
-        image='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVXl999FEKE4-GHm3BuDb93BeohdgQ9v6reg&s'/>
-    </div>
-  );
-}
+  return (<div className="flex m-20">
+    <div className="m-15">
+        <Card
+          name="Connor"
+          title="Code Manager"
+          blurb="Aspiring astrophysics major with a love of science and learning. Passionate about public transit and
+            enjoys coding."
+          github="https://github.com/Connor3386/Project-Hello-World"
+          skills="math, debate, teamwork"
+          image={ConnorPhoto}
+        />
+      </div>
+
+      <div className="m-15">
+        <Card
+          name="Jules"
+          title="Project Manager"
+          blurb="Geography lover, hockey enthusiast, public transit enjoyer. I want to make a positive change in the world
+          through transportation and history."
+          github="https://github.com/Connor3386/Project-Hello-World"
+          skills="French, geography, Ice Skating"
+          image={ConnorPhoto}
+        />
+        </div>
+  </div>
+  )
+};
 
 export default About;
