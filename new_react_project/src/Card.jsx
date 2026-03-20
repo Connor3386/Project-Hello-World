@@ -1,7 +1,7 @@
 import { useState } from "react";
 function Card({ name, title, blurb, github, skills, image }) { const [showMore, setShowMore] = useState(false);
 return (
-<div className="bg-white rounded-2xl shadow-md p-6 w-72 text-center hover: shadow-xl
+<div className="bg-white rounded-2xl shadow-md p-6 w-98 text-center hover: shadow-xl
 transition-all duration-200">
 <h3 className="text-xl font-bold text-gray-800">
 {name}
