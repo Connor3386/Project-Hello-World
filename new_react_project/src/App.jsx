@@ -7,8 +7,6 @@ import Profile from "./pages/Profile";
 function App() {
   return (
     <>
-
-    
     <BrowserRouter>
     <nav className="text-[30px] text-center font-bold">
         <Link to="/">Home</Link> |{" "}
