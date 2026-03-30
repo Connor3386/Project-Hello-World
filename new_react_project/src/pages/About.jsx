@@ -1,5 +1,6 @@
 import ConnorPhoto from "../assets/ConnorPhoto.jpeg"
 import Card from "../Card.jsx";
+import JulesPhoto from "../assets/JulesPhoto.jpg"
 
 function About() {
   return (<div className="flex m-20">
@@ -23,7 +24,7 @@ function About() {
           through transportation and history."
           github="https://github.com/Connor3386/Project-Hello-World"
           skills="French, geography, Ice Skating"
-          image={ConnorPhoto}
+          image={JulesPhoto}
         />
         </div>
   </div>
