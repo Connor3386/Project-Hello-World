@@ -12,6 +12,8 @@ import NorthConcordMartinezPhoto1 from "../assets/NorthConcordMartinezPhoto1.jpe
 import PittsburgBayPointPhoto1 from "../assets/PittsburgBayPointPhoto1.jpeg";
 import PittsburgCenterPhoto1 from "../assets/PittsburgCenterPhoto1.jpg";
 import AntiochPhoto1 from "../assets/AntiochPhoto1.jpeg";
+import LikeButton from "../components/LikeButton.jsx";
+import DislikeButton from "../components/DislikeButton.jsx";
 
 const List = () => {
   const locations = [
@@ -45,6 +47,8 @@ const List = () => {
               <div>
                 <h2 className="text-lg font-semibold">{location.name}</h2>
                 <p className="text-gray-600">{location.description}</p>
+                <LikeButton></LikeButton>
+                <DislikeButton></DislikeButton>
               </div>
             </div>
           </li>
