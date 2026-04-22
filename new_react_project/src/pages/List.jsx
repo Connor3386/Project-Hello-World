@@ -14,9 +14,12 @@ import PittsburgCenterPhoto1 from "../assets/PittsburgCenterPhoto1.jpg";
 import AntiochPhoto1 from "../assets/AntiochPhoto1.jpeg";
 import LikeButton from "../components/LikeButton.jsx";
 import DislikeButton from "../components/DislikeButton.jsx";
+import { useState } from 'react';
+
+
 
 const List = () => {
-  const locations = [
+  const [locations, setLocations] = useState([
     { id: 1, image: TwelfthStPhoto1, name: '12th St/ OaklandCity Center Bart', description: 'The local bart station that serves the Downtown Oakland area.' },
     { id: 2, image: NineteenthStPhoto1, name: '19th St/ Oakland Bart', description: 'The local bart station that serves the Downtown Oakland area.' },
     { id: 3, image: MacarthurPhoto1, name: 'Macarthur Bart', description: 'The local bart station that serves the Telegraph area.' },
@@ -29,10 +32,27 @@ const List = () => {
     { id: 10, image: NorthConcordMartinezPhoto1, name: 'North Concord/Martinez Bart', description: 'The local bart station that serves the North Concord/Martinez area.' },
     { id: 11, image: PittsburgBayPointPhoto1, name: 'Pittsburg/Bay Point Bart', description: 'The local bart station that serves the Pittsburg/Bay Point area.' },
     { id: 12, image: PittsburgCenterPhoto1, name: 'Pittsburg Center Bart', description: 'The local bart station that serves the Pittsburg Center area.' },
-    { id: 13, image: AntiochPhoto1, name: 'Antioch Bart', description: 'The local bart station that serves the Antioch area.' }
-    
-  
-  ];
+    { id: 13, image: AntiochPhoto1, name: 'Antioch Bart', description: 'The local bart station that serves the Antioch area.' },
+  ]);
+
+   const [image, setImage] = useState ("");
+   const [name, setName] = useState ("");
+   const [description, setDescription] = useState ("");
+
+   function handleSubmit (event){
+     event.preventDefault();
+        const newLocation = {
+        id: Date.now(),
+        image: image,
+        name: name,
+        description: description
+     };
+      setLocations([...locations, newLocation]);
+      setImage("")
+      setName("")
+      setDescription("");
+    }
+
 
   return (
     <div className="p-6">
@@ -54,6 +74,52 @@ const List = () => {
           </li>
         ))}
       </ul>
+
+        <br></br>
+
+       <form onSubmit={handleSubmit}>
+         <input
+         className="border"
+         type="text"
+         placeholder="Name"
+         value={name}
+                  onChange={(event) => setName(event.target.value)}
+         />
+
+         <br></br><br></br>
+
+        <input
+         className="border"
+         type="text"
+         placeholder="Description"
+         value={description}
+                  onChange={(event) => setDescription(event.target.value)}
+         />
+
+         <br></br><br></br>
+
+         <input 
+         type="file" 
+         placeholder="Image"
+         value = {image}
+                  onChange={(event) => setImage(event.target.value)}
+         />
+
+         <br></br><br></br>
+
+         <button
+         className="border"
+         type="submit">Submit</button>
+
+         </form>
+                {locations.map((location)=>(
+               <div key={location.id}>
+                       {location.description}
+               </div>
+                )
+                )}
+
+
     </div>
   );
 };
