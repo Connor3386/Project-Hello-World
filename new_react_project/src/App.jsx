@@ -10,7 +10,7 @@ import HomeMap from "./pages/HomeMap";
 function App() {
   return (
     <>
-    <BrowserRouter>
+    <BrowserRouter basename="/Project-Hello-World/">
     <nav className="navbar container">
         <Link to="/" className="nav-link">Home</Link>
         <Link to="/about" className="nav-link">About</Link>
