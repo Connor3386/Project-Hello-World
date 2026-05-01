@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import RockridgePhoto1 from "../assets/RockridgePhoto1.jpeg";
 import OrindaPhoto1 from "../assets/OrindaPhoto1.jpeg";
 import TwelfthStPhoto1 from "../assets/TwelfthStPhoto1.jpg";
@@ -12,27 +12,54 @@ import NorthConcordMartinezPhoto1 from "../assets/NorthConcordMartinezPhoto1.jpe
 import PittsburgBayPointPhoto1 from "../assets/PittsburgBayPointPhoto1.jpeg";
 import PittsburgCenterPhoto1 from "../assets/PittsburgCenterPhoto1.jpg";
 import AntiochPhoto1 from "../assets/AntiochPhoto1.jpeg";
-import LikeButton from "../components/LikeButton.jsx";
-import DislikeButton from "../components/DislikeButton.jsx";
-import { useState } from 'react';
 
 
 const List = () => {
-  const [locations, setLocations] = useState([
-    { id: 1, image: TwelfthStPhoto1, name: '12th St/ OaklandCity Center Bart', description: 'The local bart station that serves the Downtown Oakland area.' },
-    { id: 2, image: NineteenthStPhoto1, name: '19th St/ Oakland Bart', description: 'The local bart station that serves the Downtown Oakland area.' },
-    { id: 3, image: MacarthurPhoto1, name: 'Macarthur Bart', description: 'The local bart station that serves the Macarthur area.' },
-    { id: 4, image: RockridgePhoto1, name: 'Rockridge Bart', description: 'The local bart station that serves the Telegraph area.' },
-    { id: 5, image: OrindaPhoto1, name: 'Orinda Bart', description: 'The local bart station that serves the Orinda area.' },
-    { id: 6, image: LafayettePhoto1, name: 'Lafayette Bart', description: 'The local bart station that serves the Lafayette area.' },
-    { id: 7, image: WalnutCreekPhoto1, name: 'Walnut Creek Bart', description: 'The local bart station that serves the Walnut Creek area.' },
-    { id: 8, image: PleasantHillPhoto1, name: 'Pleasant Hill/ Contra Costa Bart', description: 'The local bart station that serves the Pleasant Hill/ Contra Costa area.' },
-    { id: 9, image: ConcordPhoto1, name: 'Concord Bart', description: 'The local bart station that serves the Concord area.' },
-    { id: 10, image: NorthConcordMartinezPhoto1, name: 'North Concord/Martinez Bart', description: 'The local bart station that serves the North Concord/Martinez area.' },
-    { id: 11, image: PittsburgBayPointPhoto1, name: 'Pittsburg/Bay Point Bart', description: 'The local bart station that serves the Pittsburg/Bay Point area.' },
-    { id: 12, image: PittsburgCenterPhoto1, name: 'Pittsburg Center Bart', description: 'The local bart station that serves the Pittsburg Center area.' },
-    { id: 13, image: AntiochPhoto1, name: 'Antioch Bart', description: 'The local bart station that serves the Antioch area.' },
-  ]);
+  const getInitialLocations = () => {
+    const savedData = localStorage.getItem('locationData');
+    const data = savedData ? JSON.parse(savedData) : {};
+    return [
+      { id: 1, image: TwelfthStPhoto1, name: '12th St/ OaklandCity Center Bart', description: 'The local bart station that serves the Downtown Oakland area.', likes: data[1]?.likes || 0, dislikes: data[1]?.dislikes || 0 },
+      { id: 2, image: NineteenthStPhoto1, name: '19th St/ Oakland Bart', description: 'The local bart station that serves the Downtown Oakland area.', likes: data[2]?.likes || 0, dislikes: data[2]?.dislikes || 0 },
+      { id: 3, image: MacarthurPhoto1, name: 'Macarthur Bart', description: 'The local bart station that serves the Macarthur area.', likes: data[3]?.likes || 0, dislikes: data[3]?.dislikes || 0 },
+      { id: 4, image: RockridgePhoto1, name: 'Rockridge Bart', description: 'The local bart station that serves the Telegraph area.', likes: data[4]?.likes || 0, dislikes: data[4]?.dislikes || 0 },
+      { id: 5, image: OrindaPhoto1, name: 'Orinda Bart', description: 'The local bart station that serves the Orinda area.', likes: data[5]?.likes || 0, dislikes: data[5]?.dislikes || 0 },
+      { id: 6, image: LafayettePhoto1, name: 'Lafayette Bart', description: 'The local bart station that serves the Lafayette area.', likes: data[6]?.likes || 0, dislikes: data[6]?.dislikes || 0 },
+      { id: 7, image: WalnutCreekPhoto1, name: 'Walnut Creek Bart', description: 'The local bart station that serves the Walnut Creek area.', likes: data[7]?.likes || 0, dislikes: data[7]?.dislikes || 0 },
+      { id: 8, image: PleasantHillPhoto1, name: 'Pleasant Hill/ Contra Costa Bart', description: 'The local bart station that serves the Pleasant Hill/ Contra Costa area.', likes: data[8]?.likes || 0, dislikes: data[8]?.dislikes || 0 },
+      { id: 9, image: ConcordPhoto1, name: 'Concord Bart', description: 'The local bart station that serves the Concord area.', likes: data[9]?.likes || 0, dislikes: data[9]?.dislikes || 0 },
+      { id: 10, image: NorthConcordMartinezPhoto1, name: 'North Concord/Martinez Bart', description: 'The local bart station that serves the North Concord/Martinez area.', likes: data[10]?.likes || 0, dislikes: data[10]?.dislikes || 0 },
+      { id: 11, image: PittsburgBayPointPhoto1, name: 'Pittsburg/Bay Point Bart', description: 'The local bart station that serves the Pittsburg/Bay Point area.', likes: data[11]?.likes || 0, dislikes: data[11]?.dislikes || 0 },
+      { id: 12, image: PittsburgCenterPhoto1, name: 'Pittsburg Center Bart', description: 'The local bart station that serves the Pittsburg Center area.', likes: data[12]?.likes || 0, dislikes: data[12]?.dislikes || 0 },
+      { id: 13, image: AntiochPhoto1, name: 'Antioch Bart', description: 'The local bart station that serves the Antioch area.', likes: data[13]?.likes || 0, dislikes: data[13]?.dislikes || 0 },
+    ];
+  };
+
+  const [locations, setLocations] = useState(getInitialLocations);
+
+  useEffect(() => {
+    const data = {};
+    locations.forEach(location => {
+      data[location.id] = { likes: location.likes, dislikes: location.dislikes };
+    });
+    localStorage.setItem('locationData', JSON.stringify(data));
+  }, [locations]);
+
+  const handleLike = (id) => {
+    setLocations(prevLocations =>
+      prevLocations.map(location =>
+        location.id === id ? { ...location, likes: location.likes + 1 } : location
+      )
+    );
+  };
+
+  const handleDislike = (id) => {
+    setLocations(prevLocations =>
+      prevLocations.map(location =>
+        location.id === id ? { ...location, dislikes: location.dislikes + 1 } : location
+      )
+    );
+  };
 
    const [image, setImage] = useState ("");
    const [name, setName] = useState ("");
@@ -44,7 +71,9 @@ const List = () => {
         id: Date.now(),
         image: image,
         name: name,
-        description: description
+        description: description,
+        likes: 0,
+        dislikes: 0
      };
       setLocations([...locations, newLocation]);
       setImage("")
@@ -71,8 +100,22 @@ const List = () => {
               <div>
                 <h2 className="text-lg font-semibold">{location.name}</h2>
                 <p className="text-gray-600">{location.description}</p>
-                <LikeButton></LikeButton>
-                <DislikeButton></DislikeButton>
+                <div className="flex items-center gap-2 mt-2">
+                  <button
+                    onClick={() => handleLike(location.id)}
+                    className="flex items-center gap-2 bg-gray-100 hover:bg-red-100 px-4 py-2 rounded-full transition-all duration-200"
+                  >
+                    <span className="text-xl">👍</span>
+                    <span className="font-bold text-gray-700">{location.likes}</span>
+                  </button>
+                  <button
+                    onClick={() => handleDislike(location.id)}
+                    className="flex items-center gap-2 bg-gray-100 hover:bg-blue-100 px-4 py-2 rounded-full transition-all duration-200"
+                  >
+                    <span className="text-xl">👎</span>
+                    <span className="font-bold text-gray-700">{location.dislikes}</span>
+                  </button>
+                </div>
               </div>
             </div>
           </li>
