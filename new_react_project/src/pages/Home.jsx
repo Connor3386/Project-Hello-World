@@ -12,7 +12,7 @@ function Home() {
         marginTop: '20px',
         maxWidth: '1500px'
       }}>
-        <h2>Map App</h2>
+        
         <div style={{ 
           width: '100%', 
           height: '600px', 
@@ -23,7 +23,7 @@ function Home() {
           justifyContent: 'center',
           marginBottom: '15px'
         }}>
-          <p style={{ color: '#666' }}>Map View Here</p>
+         
           <img src={BartPhoto} alt="Bart Station" style={{ maxWidth: '100%', maxHeight: '100%' }} />
 
         </div>
